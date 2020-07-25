@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quest/components/StoryBook.dart';
+import 'package:quest/components/StoryBookComponent/StoryBook.dart';
+
+import 'NavigationBar/NavigationBar.dart';
 
 class StoriesLandingPage extends StatelessWidget {
   final contests;
@@ -23,6 +25,7 @@ class StoriesLandingPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              NavigationBar(),
               StoryBook(contests: contests),
             ],
           ),
