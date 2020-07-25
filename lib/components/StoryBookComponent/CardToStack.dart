@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 class CardToStack extends StatelessWidget {
   const CardToStack({
     Key key,
@@ -44,9 +45,25 @@ class CardToStack extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: <Widget>[
-                Image.network(
-                  images[i],
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  child: Hero(
+                    tag: 'contestHero' + i.toString(),
+                    child: Image.network(
+                      images[i],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  onTap: () {
+                    print('hemfmef');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return ContestDetailScreen(heroTag: 'contestHero' + i.toString(),imageUrl: images[i],);
+                        },
+                      ),
+                    );
+                  },
                 ),
                 Align(
                   alignment: Alignment.bottomLeft,
@@ -67,16 +84,23 @@ class CardToStack extends StatelessWidget {
                         height: 10.0,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12.0, bottom: 12.0),
+                        padding:
+                            const EdgeInsets.only(left: 12.0, bottom: 12.0),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 22.0, vertical: 6.0),
+                            horizontal: 22.0,
+                            vertical: 6.0,
+                          ),
                           decoration: BoxDecoration(
                               color: Colors.blueAccent,
                               borderRadius: BorderRadius.circular(20.0)),
-                          child: Text("Read Later",
-                              style: TextStyle(color: Colors.white)),
+                          child: GestureDetector(
+                            onTap: () {
+                              print('dsfsdf');
+                            },
+                            child: Text("Read Later",
+                                style: TextStyle(color: Colors.white)),
+                          ),
                         ),
                       )
                     ],
@@ -86,6 +110,31 @@ class CardToStack extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ContestDetailScreen extends StatelessWidget {
+  final heroTag;
+  final imageUrl;
+  ContestDetailScreen({this.heroTag,this.imageUrl});
+  @override
+  Widget build(BuildContext context) {
+    print('hemfmef');
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: heroTag,
+            child: Image.network(imageUrl,
+            fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
