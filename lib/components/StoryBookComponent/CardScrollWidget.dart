@@ -1,9 +1,9 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
 import 'CardToStack.dart';
+
 class CardScrollWidget extends StatelessWidget {
   var currentPage;
   var padding = 20.0;
@@ -12,7 +12,12 @@ class CardScrollWidget extends StatelessWidget {
   final title;
   var cardAspectRatio;
   var widgetAspectRatio;
-  CardScrollWidget({this.currentPage, this.images, this.title, this.cardAspectRatio,this.widgetAspectRatio});
+  CardScrollWidget(
+      {this.currentPage,
+      this.images,
+      this.title,
+      this.cardAspectRatio,
+      this.widgetAspectRatio});
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +48,41 @@ class CardScrollWidget extends StatelessWidget {
                       horizontalInset * -delta * (isOnRight ? 15 : 1),
                   0.0);
 
-          var cardItem = CardToStack(padding: padding, verticalInset: verticalInset, delta: delta, start: start, cardAspectRatio: cardAspectRatio, images: images, i: i, title: title);
+          var cardItem = CardToStack(
+              padding: padding,
+              verticalInset: verticalInset,
+              delta: delta,
+              start: start,
+              cardAspectRatio: cardAspectRatio,
+              images: images,
+              i: i,
+              title: title);
           cardList.add(cardItem);
         }
         return Stack(
           children: cardList,
         );
       }),
+    );
+  }
+}
+class ContestDetailScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: 'contestHero',
+            child: Image.network(
+              'https://picsum.photos/250?image=9',
+            ),
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }
