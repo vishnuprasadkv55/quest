@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:quest/models/contests/AppDetail.dart';
-import 'package:quest/models/contests/Contest.dart';
 
 import 'components/StoriesLandingPage.dart';
 
