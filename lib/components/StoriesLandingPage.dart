@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quest/components/StoryBookComponent/StoryBook.dart';
+import 'package:quest/models/contests/Contest.dart';
 
 import 'NavigationBar/NavigationBar.dart';
+import 'StoryBookComponent/AllGamesCard.dart';
+import 'StoryBookComponent/ContentDetailScreen.dart';
 
 class StoriesLandingPage extends StatelessWidget {
   final contests;
@@ -22,13 +25,82 @@ class StoriesLandingPage extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Column(
-          children: <Widget>[
-            NavigationBar(),
-            StoryBook(contests: contests),
-          ],
+        body: SingleChildScrollView(
+          child: SizedBox(
+            child: Column(
+              children: <Widget>[
+                NavigationBar(),
+                Favourites(contests: contests),
+                AllGames(contests: contests)
+              ],
+            ),
+          ),
         ),
       ),
+    );
+  }
+}
+
+class AllGames extends StatelessWidget {
+  const AllGames({
+    Key key,
+    @required this.contests,
+  }) : super(key: key);
+
+  final contests;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(
+            left: 20,
+            top: 30,
+          ),
+          alignment: Alignment.topLeft,
+          child: Text(
+            'All Games',
+            style: TextStyle(
+              fontSize: 32,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        AllGamesCard(contests: contests)
+      ],
+    );
+  }
+}
+
+class Favourites extends StatelessWidget {
+  const Favourites({
+    Key key,
+    @required this.contests,
+  }) : super(key: key);
+
+  final contests;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(left: 20),
+          alignment: Alignment.topLeft,
+          child: Text(
+            'Favourites',
+            style: TextStyle(
+              fontSize: 32,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        StoryBook(contests: contests),
+      ],
     );
   }
 }

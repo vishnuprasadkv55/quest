@@ -8,33 +8,28 @@ class ContestDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        child: Hero(
-          tag: new Text(heroTag),
-          child: Center(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Container(
+            alignment: Alignment.topCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                ContestImagePreview(
+                  imageUrl: imageUrl,
+                  heroTag: heroTag,
                 ),
-              ),
-              child: Container(
-                alignment: Alignment.topCenter,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    ContestImagePreview(imageUrl: imageUrl),
-                    ContestInformation(title: title)
-                  ],
-                ),
-              ),
+                ContestInformation(title: title)
+              ],
             ),
           ),
         ),
-        onTap: () {
-          Navigator.pop(context);
-        },
       ),
     );
   }
@@ -87,8 +82,9 @@ class ContestImagePreview extends StatelessWidget {
   const ContestImagePreview({
     Key key,
     @required this.imageUrl,
+    @required this.heroTag,
   }) : super(key: key);
-
+  final heroTag;
   final imageUrl;
 
   @override
@@ -96,9 +92,19 @@ class ContestImagePreview extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 2,
       width: MediaQuery.of(context).size.width,
-      child: Image.network(
-        imageUrl,
-        fit: BoxFit.cover,
+      child: GestureDetector(
+        child: Hero(
+          tag: new Text(
+            heroTag,
+          ),
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
