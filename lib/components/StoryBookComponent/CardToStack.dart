@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quest/components/StoryBookComponent/ContentDetailScreen.dart';
 
 class CardToStack extends StatelessWidget {
   const CardToStack({
@@ -40,6 +41,7 @@ class CardToStack extends StatelessWidget {
                       return ContestDetailScreen(
                         heroTag: 'contestHero_' + index,
                         imageUrl: image,
+                        title: title,
                       );
                     },
                   ),
@@ -83,51 +85,6 @@ class CardToStack extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ContestDetailScreen extends StatelessWidget {
-  final heroTag;
-  final imageUrl;
-  ContestDetailScreen({this.heroTag, this.imageUrl});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Hero(
-          tag: new Text(heroTag),
-          child: Center(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Container(
-              alignment: Alignment.topCenter,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Image.network(
-                      imageUrl,
-                      fit: BoxFit.contain,
-                    ),
-                    Text(
-                      'data',
-                      style: TextStyle(fontSize: 32),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        onTap: () {
-          Navigator.pop(context);
-        },
       ),
     );
   }
