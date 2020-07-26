@@ -8,27 +8,34 @@ class NavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu),
-            color: Colors.white,
-            iconSize: 32,
-            onPressed: () {Scaffold.of(context).openDrawer();},
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 20,
           ),
-          Text(
-            'Quest',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 32,
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.search),
-            color: Colors.white,
-            iconSize: 32,
-            onPressed: () {},
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.menu),
+                color: Colors.white,
+                iconSize: 32,
+                onPressed: () {Scaffold.of(context).openDrawer();},
+              ),
+              Text(
+                'Quest',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.search),
+                color: Colors.white,
+                iconSize: 32,
+                onPressed: () {},
+              ),
+            ],
           ),
         ],
       ),

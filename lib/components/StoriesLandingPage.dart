@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quest/components/StoryBookComponent/FeaturedGamesSlide.dart';
 import 'package:quest/components/StoryBookComponent/StoryBook.dart';
 import 'package:quest/models/contests/Contest.dart';
 
@@ -31,6 +32,27 @@ class StoriesLandingPage extends StatelessWidget {
               children: <Widget>[
                 NavigationBar(),
                 Favourites(contests: contests),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(left: 20, top: 30),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Featured',
+                        style: TextStyle(
+                          fontSize: 32,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    FeaturedGamesSlide(
+                      contests: contests,
+                    )
+                  ],
+                ),
                 AllGames(contests: contests)
               ],
             ),
@@ -67,7 +89,9 @@ class AllGames extends StatelessWidget {
             ),
           ),
         ),
-        AllGamesCard(contests: contests)
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: AllGamesCard(contests: contests))
       ],
     );
   }
