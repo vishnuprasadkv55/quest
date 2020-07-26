@@ -22,13 +22,11 @@ class StoriesLandingPage extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              NavigationBar(),
-              StoryBook(contests: contests),
-            ],
-          ),
+        body: Column(
+          children: <Widget>[
+            NavigationBar(),
+            StoryBook(contests: contests),
+          ],
         ),
       ),
     );

@@ -1,114 +1,87 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class CardToStack extends StatelessWidget {
   const CardToStack({
     Key key,
-    @required this.padding,
-    @required this.verticalInset,
-    @required this.delta,
-    @required this.start,
-    @required this.cardAspectRatio,
-    @required this.images,
-    @required this.i,
+    @required this.image,
     @required this.title,
+    @required this.index,
   }) : super(key: key);
 
-  final double padding;
-  final double verticalInset;
-  final num delta;
-  final double start;
-  final cardAspectRatio;
-  final images;
-  final int i;
+  final image;
   final title;
-
+  final index;
   @override
   Widget build(BuildContext context) {
-    return Positioned.directional(
-      top: padding + verticalInset * max(-delta, 0.0),
-      bottom: padding + verticalInset * max(-delta, 0.0),
-      start: start,
-      textDirection: TextDirection.rtl,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16.0),
-        child: Container(
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.black12,
-                offset: Offset(3.0, 6.0),
-                blurRadius: 10.0)
-          ]),
-          child: AspectRatio(
-            aspectRatio: cardAspectRatio,
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                GestureDetector(
-                  child: Hero(
-                    tag: 'contestHero' + i.toString(),
-                    child: Image.network(
-                      images[i],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  onTap: () {
-                    print('hemfmef');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return ContestDetailScreen(heroTag: 'contestHero' + i.toString(),imageUrl: images[i],);
-                        },
-                      ),
-                    );
-                  },
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+      child: Container(
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              color: Colors.black12, offset: Offset(3.0, 6.0), blurRadius: 10.0)
+        ]),
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            GestureDetector(
+              child: Hero(
+                tag: new Text('contestHero_' + index),
+                child: Image.network(
+                  image,
+                  fit: BoxFit.cover,
                 ),
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: Text(title[i],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
-                                fontFamily: "SF-Pro-Text-Regular")),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 12.0, bottom: 12.0),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 22.0,
-                            vertical: 6.0,
-                          ),
-                          decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: GestureDetector(
-                            onTap: () {
-                              print('dsfsdf');
-                            },
-                            child: Text("Read Later",
-                                style: TextStyle(color: Colors.white)),
-                          ),
-                        ),
-                      )
-                    ],
+              ),
+              onTap: () {
+                print('contestHero_' + index);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) {
+                      return ContestDetailScreen(
+                        heroTag: 'contestHero_' + index,
+                        imageUrl: image,
+                      );
+                    },
                   ),
-                )
-              ],
+                );
+              },
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    child: Text(title,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontFamily: "SF-Pro-Text-Regular")),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0, bottom: 12.0),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 22.0,
+                        vertical: 6.0,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: Text("Play now",
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -118,17 +91,32 @@ class CardToStack extends StatelessWidget {
 class ContestDetailScreen extends StatelessWidget {
   final heroTag;
   final imageUrl;
-  ContestDetailScreen({this.heroTag,this.imageUrl});
+  ContestDetailScreen({this.heroTag, this.imageUrl});
   @override
   Widget build(BuildContext context) {
-    print('hemfmef');
     return Scaffold(
       body: GestureDetector(
-        child: Center(
-          child: Hero(
-            tag: heroTag,
-            child: Image.network(imageUrl,
-            fit: BoxFit.cover,
+        child: Hero(
+          tag: new Text(heroTag),
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
+            )),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: FractionallySizedBox(
+                    heightFactor: 0.5,
+                    child: Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

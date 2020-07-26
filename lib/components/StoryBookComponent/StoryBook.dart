@@ -1,59 +1,31 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'CardScrollWidget.dart';
+import 'CardToStack.dart';
 
 class StoryBook extends StatefulWidget {
   @override
   _StoryBookState createState() => _StoryBookState();
   final contests;
-  var currentPage;
-  StoryBook({this.contests})
-      : currentPage =
-            (contests.map((item) => item.generalConfig.thumbnail).toList())
-                    .length -
-                1.0;
+  StoryBook({this.contests});
 }
-
-var cardAspectRatio = 12.0 / 16.0;
-var widgetAspectRatio = cardAspectRatio * 1.2;
 
 class _StoryBookState extends State<StoryBook> {
   @override
   Widget build(BuildContext context) {
     List images =
         widget.contests.map((item) => item.generalConfig.thumbnail).toList();
-    List title = widget.contests.map((item) => item.gameLabel).toList();
-    PageController controller = PageController(initialPage: images.length - 1);
-    controller.addListener(() {
-      setState(() {
-        widget.currentPage = controller.page;
-      });
-    });
-    return Stack(
-      children: <Widget>[
-        CardScrollWidget(
-            currentPage: widget.currentPage,
-            images: images,
-            title: title,
-            cardAspectRatio: cardAspectRatio,
-            widgetAspectRatio: widgetAspectRatio),
-        Positioned.fill(
-          child: PageView.builder(
-            itemCount: images.length,
-            controller: controller,
-            reverse: true,
-            itemBuilder: (context, index) {
-              return Container();
-
-              // return new GestureDetector(
-              //   onTap: () => print("Action at card $index"),
-              // );
-            },
-          ),
-        )
-      ],
+    List titles = widget.contests.map((item) => item.gameLabel).toList();
+    return Container(
+      height: 300,
+      child: new Swiper(
+        itemBuilder: (BuildContext context, int index) {
+          return CardToStack(image: images[index], title: titles[index],index: index.toString(),);
+        },
+        itemCount: images.length,
+        itemWidth: 300.0,
+        layout: SwiperLayout.STACK,
+      ),
     );
   }
 }
