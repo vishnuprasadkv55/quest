@@ -98,25 +98,30 @@ class ContestDetailScreen extends StatelessWidget {
       body: GestureDetector(
         child: Hero(
           tag: new Text(heroTag),
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-              image: NetworkImage(imageUrl),
-              fit: BoxFit.cover,
-            )),
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: FractionallySizedBox(
-                    heightFactor: 0.5,
-                    child: Image.network(
-                      imageUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  image: NetworkImage(imageUrl),
+                  fit: BoxFit.cover,
                 ),
-              ],
+              ),
+              child: Container(
+              alignment: Alignment.topCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Image.network(
+                      imageUrl,
+                      fit: BoxFit.contain,
+                    ),
+                    Text(
+                      'data',
+                      style: TextStyle(fontSize: 32),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         ),
