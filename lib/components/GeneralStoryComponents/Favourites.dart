@@ -26,13 +26,17 @@ class Favourites extends StatelessWidget {
             style: TextStyle(
               fontSize: 32,
               color: Colors.white,
+              fontWeight: FontWeight.bold
             ),
           ),
         ),
         SizedBox(
           height: 30,
         ),
-        StoryBook(contests: contests),
+        StoryBook(contests: contests),        
+        SizedBox(
+          height: 35,
+        ),
       ],
     );
   }

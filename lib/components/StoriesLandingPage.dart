@@ -18,9 +18,6 @@ class StoriesLandingPage extends StatelessWidget {
             Color(0xFF1b1e44),
             Color(0xFF2d3447),
           ],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          tileMode: TileMode.clamp,
         ),
       ),
       child: Scaffold(

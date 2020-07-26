@@ -22,13 +22,6 @@ class NavigationBar extends StatelessWidget {
                 iconSize: 32,
                 onPressed: () {Scaffold.of(context).openDrawer();},
               ),
-              Text(
-                'Quest',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32,
-                ),
-              ),
               IconButton(
                 icon: Icon(Icons.search),
                 color: Colors.white,
