@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:quest/components/StoryBookComponent/FeaturedGamesSlide.dart';
-import 'package:quest/components/StoryBookComponent/StoryBook.dart';
-import 'package:quest/models/contests/Contest.dart';
+import 'package:quest/components/GeneralStoryComponents/FeaturedGamesSlide.dart';
 
+import 'GeneralStoryComponents/AllGames.dart';
+import 'GeneralStoryComponents/Favourites.dart';
+import 'GeneralStoryComponents/Featured.dart';
 import 'NavigationBar/NavigationBar.dart';
-import 'StoryBookComponent/AllGamesCard.dart';
-import 'StoryBookComponent/ContentDetailScreen.dart';
 
 class StoriesLandingPage extends StatelessWidget {
   final contests;
@@ -31,100 +30,16 @@ class StoriesLandingPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 NavigationBar(),
-                Favourites(contests: contests),
-                Column(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(left: 20, top: 30),
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Featured',
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    FeaturedGamesSlide(
-                      contests: contests,
-                    )
-                  ],
-                ),
+                Favourites(contests: contests,title: 'Favourites',),
+                Favourites(contests: contests,title: 'Continue Playing',),
+                Favourites(contests: contests,title: 'Newly Added',),
+                Featured(contests: contests),
                 AllGames(contests: contests)
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class AllGames extends StatelessWidget {
-  const AllGames({
-    Key key,
-    @required this.contests,
-  }) : super(key: key);
-
-  final contests;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.only(
-            left: 20,
-            top: 30,
-          ),
-          alignment: Alignment.topLeft,
-          child: Text(
-            'All Games',
-            style: TextStyle(
-              fontSize: 32,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(10),
-          child: AllGamesCard(contests: contests))
-      ],
-    );
-  }
-}
-
-class Favourites extends StatelessWidget {
-  const Favourites({
-    Key key,
-    @required this.contests,
-  }) : super(key: key);
-
-  final contests;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.only(left: 20),
-          alignment: Alignment.topLeft,
-          child: Text(
-            'Favourites',
-            style: TextStyle(
-              fontSize: 32,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 30,
-        ),
-        StoryBook(contests: contests),
-      ],
     );
   }
 }

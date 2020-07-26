@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'CardToStack.dart';
+import '../StoryBookComponent/CardToStack.dart';
 
 class FeaturedGamesSlide extends StatefulWidget {
   @override

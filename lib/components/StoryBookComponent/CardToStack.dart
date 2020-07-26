@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quest/components/StoryBookComponent/ContentDetailScreen.dart';
+import 'package:quest/components/GeneralStoryComponents/ContentDetailScreen.dart';
 
 class CardToStack extends StatelessWidget {
   const CardToStack({
