@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quest/components/GeneralStoryComponents/FeaturedGamesSlide.dart';
 
-import 'GeneralStoryComponents/AllGames.dart';
-import 'GeneralStoryComponents/Favourites.dart';
-import 'GeneralStoryComponents/Featured.dart';
-import 'NavigationBar/NavigationBar.dart';
+import '../GeneralStoryComponents/AllGames.dart';
+import '../GeneralStoryComponents/Favourites.dart';
+import '../GeneralStoryComponents/Featured.dart';
+import '../NavigationBar/NavigationBar.dart';
 
 class StoriesLandingPage extends StatelessWidget {
   final contests;

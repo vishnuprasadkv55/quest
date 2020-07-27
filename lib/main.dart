@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quest/components/LoginSignupPage/LoginSignupPage.dart';
 import 'package:quest/models/contests/AppDetail.dart';
 
-import 'components/StoriesLandingPage.dart';
+import 'components/LandingPage/StoriesLandingPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -316,7 +317,9 @@ class MyApp extends StatelessWidget {
           //   backgroundColor: Colors.transparent,
           //     ),
           body: Center(
-        child: StoriesLandingPage(contests: appDetailObj.contests),
+            
+        child: LoginSignupPage(),
+        // child: StoriesLandingPage(contests: appDetailObj.contests),
       )),
     );
   }
