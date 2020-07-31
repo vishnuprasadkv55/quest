@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:quest/components/GeneralStoryComponents/FeaturedGamesSlide.dart';
 
 import '../GeneralStoryComponents/AllGames.dart';
-import '../GeneralStoryComponents/Favourites.dart';
+import '../GeneralStoryComponents/PageSwipeComponent.dart';
 import '../GeneralStoryComponents/Featured.dart';
 import '../NavigationBar/NavigationBar.dart';
 
 class StoriesLandingPage extends StatelessWidget {
   final contests;
-  StoriesLandingPage({this.contests});
+  final userData;
+  StoriesLandingPage({this.contests,this.userData});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,9 +28,9 @@ class StoriesLandingPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 NavigationBar(),
-                Favourites(contests: contests,title: 'Favourites',),
-                Favourites(contests: contests,title: 'Continue Playing',),
-                Favourites(contests: contests,title: 'Newly Added',),
+                PageSwipeComponent(contests: contests,title: 'Favourites',listToShow: userData.favourites,isLoop: false,),
+                PageSwipeComponent(contests: contests,title: 'Continue Playing',listToShow: userData.favourites,isLoop: false,),
+                PageSwipeComponent(contests: contests,title: 'Newly Added',listToShow: userData.favourites,isLoop: true,),
                 Featured(contests: contests),
                 AllGames(contests: contests)
               ],

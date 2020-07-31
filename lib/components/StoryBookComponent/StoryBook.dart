@@ -7,7 +7,8 @@ class StoryBook extends StatefulWidget {
   @override
   _StoryBookState createState() => _StoryBookState();
   final contests;
-  StoryBook({this.contests});
+  final isLoop;
+  StoryBook({this.contests,this.isLoop});
 }
 
 class _StoryBookState extends State<StoryBook> {
@@ -25,6 +26,7 @@ class _StoryBookState extends State<StoryBook> {
         itemCount: images.length,
         itemWidth: 300.0,
         layout: SwiperLayout.STACK,
+        loop: widget.isLoop,
       ),
     );
   }

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quest/components/LandingPage/StoriesLandingPage.dart';
 import 'package:quest/components/LoginSignupPage/SignIn.dart';
 import 'package:quest/models/contests/AppDetail.dart';
+import 'package:quest/models/user/User.dart';
 
 class HomeLoad extends StatefulWidget {
   final currentUser;
@@ -15,6 +18,7 @@ class _HomeLoadState extends State<HomeLoad> {
   bool _isLoading = true;
   Object data;
   AppDetail appDetailObj;
+  User userData;
   @override
   void initState() {
     super.initState();
@@ -34,7 +38,9 @@ class _HomeLoadState extends State<HomeLoad> {
           .document(currentUser.uid)
           .get()
           .then((userDetails) {
-            print(userDetails);
+        // print(userDetails['favs']);
+        userData = User.fromJson(userDetails);
+        print(userData.favourites);
         this.setState(() {
           _isLoading = false;
         });
@@ -51,7 +57,10 @@ class _HomeLoadState extends State<HomeLoad> {
       body: Center(
         child: _isLoading
             ? showCircularProgress()
-            : StoriesLandingPage(contests: appDetailObj.contests),
+            : StoriesLandingPage(
+                contests: appDetailObj.contests,
+                userData: userData,
+              ),
       ),
     );
   }
