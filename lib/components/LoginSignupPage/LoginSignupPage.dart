@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quest/components/LoadingScreen/HomeLoad.dart';
+import 'SignIn.dart';
 
 class LoginSignupPage extends StatefulWidget {
   @override
@@ -6,6 +8,49 @@ class LoginSignupPage extends StatefulWidget {
 }
 
 class _LoginSignupPageState extends State<LoginSignupPage> {
+  Widget _signInButton() {
+    return OutlineButton(
+      splashColor: Colors.grey,
+      onPressed: () {
+        signInWithGoogle().whenComplete(() {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return HomeLoad(currentUser: currentUser,);
+              },
+            ),
+          );
+        });
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      highlightElevation: 0,
+      borderSide: BorderSide(color: Colors.grey),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.network(
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png',
+              height: 35.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.grey,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -73,7 +118,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 70,
+                    height: 35,
+                  ),
+                  _signInButton(),
+                  SizedBox(
+                    height: 35,
                   ),
                   Text(
                     "Forgot Password?",
