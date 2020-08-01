@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quest/components/GameComponents/GameMainScreen.dart';
 import 'package:quest/components/LandingPage/HomePage.dart';
 
 void main() => runApp(MyApp());
@@ -9,7 +10,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => HomePage()
+        '/': (context) => HomePage(),
+        'game': (context) => GameMainScreen(),
       },
     );
   }

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:quest/components/GameComponents/GameMainScreen.dart';
 
 class ContestDetailScreen extends StatelessWidget {
   final heroTag;
   final imageUrl;
   final title;
-  ContestDetailScreen({this.heroTag, this.imageUrl, this.title});
+  final gameDetail;
+  final userData;
+  ContestDetailScreen(
+      {this.heroTag,
+      this.imageUrl,
+      this.title,
+      this.gameDetail,
+      this.userData});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +34,11 @@ class ContestDetailScreen extends StatelessWidget {
                   imageUrl: imageUrl,
                   heroTag: heroTag,
                 ),
-                ContestInformation(title: title)
+                ContestInformation(
+                  title: title,
+                  gameDetail: gameDetail,
+                  userData: userData,
+                ),
               ],
             ),
           ),
@@ -36,8 +49,12 @@ class ContestDetailScreen extends StatelessWidget {
 }
 
 class ContestInformation extends StatelessWidget {
-  const ContestInformation({Key key, this.title}) : super(key: key);
+  const ContestInformation(
+      {Key key, this.title, this.gameDetail, this.userData})
+      : super(key: key);
   final title;
+  final gameDetail;
+  final userData;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -66,8 +83,22 @@ class ContestInformation extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(20.0)),
-                  child:
-                      Text("Play now", style: TextStyle(color: Colors.white)),
+                  child: InkWell(
+                      child: Text(
+                        "Play now",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GameMainScreen(
+                              gameDetail: gameDetail,
+                              userData: userData,
+                            ),
+                          ),
+                        );
+                      }),
                 ),
               )
             ],

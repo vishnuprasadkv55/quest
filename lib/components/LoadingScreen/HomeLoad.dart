@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:quest/components/LandingPage/StoriesLandingPage.dart';
 import 'package:quest/components/LoginSignupPage/SignIn.dart';
 import 'package:quest/models/contests/AppDetail.dart';
@@ -54,9 +55,21 @@ class _HomeLoadState extends State<HomeLoad> {
       body: Center(
         child: _isLoading
             ? showCircularProgress()
-            : StoriesLandingPage(
-                contests: appDetailObj.contests,
-                userData: userData,
+            : MultiProvider(
+                providers: [
+                  Provider<AppDetail>(
+                    create: (context) => appDetailObj,
+
+                  ),
+                  Provider<User>(
+                    create: (context) => userData,
+                    
+                  ),
+                ],
+                child: StoriesLandingPage(
+                  contests: appDetailObj.contests,
+                  userData: userData,
+                ),
               ),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quest/models/contests/Contest.dart';
+import 'package:quest/models/user/User.dart';
 
 import 'ContentDetailScreen.dart';
 
@@ -13,6 +15,7 @@ class AllGamesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = Provider.of<User>(context);
     return Container(
       child: Column(
         children: <Widget>[
@@ -46,6 +49,8 @@ class AllGamesCard extends StatelessWidget {
                                     contests.indexOf(item).toString(),
                                 imageUrl: item.generalConfig.thumbnail,
                                 title: item.gameName,
+                                gameDetail: item,
+                                userData: userData,
                               );
                             },
                           ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quest/components/GeneralStoryComponents/ContentDetailScreen.dart';
+import 'package:quest/models/contests/AppDetail.dart';
+import 'package:quest/models/user/User.dart';
 
 class CardToStack extends StatelessWidget {
   const CardToStack({
@@ -14,6 +17,10 @@ class CardToStack extends StatelessWidget {
   final index;
   @override
   Widget build(BuildContext context) {
+    
+    final contests = Provider.of<AppDetail>(context);
+    
+    final userData = Provider.of<User>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(16.0),
       child: Container(
@@ -42,6 +49,8 @@ class CardToStack extends StatelessWidget {
                         heroTag: 'contestHero_' + index,
                         imageUrl: image,
                         title: title,
+                        gameDetail: contests.contests[int.parse(index)],
+                        userData: userData
                       );
                     },
                   ),
