@@ -5,7 +5,7 @@ class QuestionConfig {
   QuestionConfig(this.textColor, this.imageTheme, this.imageUrl);
   factory QuestionConfig.fromJson(dynamic json) {
     return QuestionConfig(json['textColor'] as String,
-        json['imageTheme'] as String, json['imageUrl'] as String);
+        json['imageTheme'] as String, json['img'] as String);
   }
   @override
   String toString() {

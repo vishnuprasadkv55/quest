@@ -38,7 +38,9 @@ class _HomeLoadState extends State<HomeLoad> {
           .get()
           .then((userDetails) {
         userData = User.fromJson(userDetails);
-        print(userData.favourites);
+        userData.currentUser = currentUser;
+        print('userData.favourites');
+        print(userData.currentUser);
         this.setState(() {
           _isLoading = false;
         });
