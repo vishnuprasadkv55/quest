@@ -16,7 +16,6 @@ class HomeLoad extends StatefulWidget {
 
 class _HomeLoadState extends State<HomeLoad> {
   bool _isLoading = true;
-  Object data;
   AppDetail appDetailObj;
   User userData;
   @override
@@ -32,13 +31,11 @@ class _HomeLoadState extends State<HomeLoad> {
         .get()
         .then((data) {
       appDetailObj = AppDetail.fromJson(data);
-      this.data = data;
       databaseReference
           .collection('users')
           .document(currentUser.uid)
           .get()
           .then((userDetails) {
-        // print(userDetails['favs']);
         userData = User.fromJson(userDetails);
         print(userData.favourites);
         this.setState(() {
